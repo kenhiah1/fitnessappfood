@@ -1,6 +1,5 @@
 /* ======================
    FOOD DATABASE
-   Calories per 100g
 ====================== */
 
 const foodDB = {
@@ -66,33 +65,34 @@ const goal = 2000;
 let currentFood = null;
 
 /* ======================
-   CAMERA (OPTIONAL)
+   CAMERA
 ====================== */
 navigator.mediaDevices.getUserMedia({ video: true })
   .then(stream => video.srcObject = stream)
   .catch(() => console.log("Camera disabled"));
 
 /* ======================
-   FOOD LOOKUP
+   FOOD LOOKUP FUNCTION
 ====================== */
 function lookupFood(name) {
-  const key = name.toLowerCase().trim();
-  return foodDB[key] || null;
+  return foodDB[name.toLowerCase().trim()] || null;
 }
 
+/* ======================
+   ADD FOOD BUTTON
+====================== */
 addFoodBtn.onclick = () => {
   const food = foodInput.value;
-  const calories = lookupFood(food);
+  if (!food) return alert("Please type or say a food.");
 
-  if (!calories) {
-    alert("Food not found. Try another name.");
-    return;
-  }
+  const calories = lookupFood(food);
+  if (!calories) return alert(`Food "${food}" not found.`);
 
   currentFood = { name: food, calories };
-  foodLabel.textContent = food;
-  foodCals.textContent = calories;
 
+  // Show result card (optional)
+  foodLabel.textContent = currentFood.name;
+  foodCals.textContent = currentFood.calories;
   resultCard.classList.remove("hidden");
 };
 
@@ -100,18 +100,26 @@ addFoodBtn.onclick = () => {
    CONFIRM ADD
 ====================== */
 confirmAdd.onclick = () => {
+  if (!currentFood) return;
+
+  // Add to total
   totalCals += currentFood.calories;
   totalCalsEl.textContent = totalCals;
 
-  progressBar.style.width = Math.min((totalCals / goal) * 100, 100) + "%";
+  // Update progress bar
+  const percent = Math.min((totalCals / goal) * 100, 100);
+  progressBar.style.width = percent + "%";
 
+  // Add to log
   const item = document.createElement("div");
   item.className = "log-item";
   item.innerHTML = `<span>${currentFood.name}</span><span>${currentFood.calories} kcal</span>`;
   logList.prepend(item);
 
-  resultCard.classList.add("hidden");
+  // Reset
+  currentFood = null;
   foodInput.value = "";
+  resultCard.classList.add("hidden");
 };
 
 /* ======================
@@ -121,9 +129,7 @@ if ("webkitSpeechRecognition" in window) {
   const recognition = new webkitSpeechRecognition();
   recognition.lang = "en-US";
 
-  micBtn.onclick = () => {
-    recognition.start();
-  };
+  micBtn.onclick = () => recognition.start();
 
   recognition.onresult = (event) => {
     foodInput.value = event.results[0][0].transcript;
