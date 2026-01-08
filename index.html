@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>FitnessSnap AI</title>
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FitnessSnap">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>FitnessSnap</title>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+<div class="app-shell">
 
-    <div class="app-shell">
-        <header>
-            <h1>FitnessSnap</h1>
-            <div class="daily-stat">
-                <span id="total-cals">0</span> / <span id="goal-cals">2000</span> kcal
-            </div>
-            <div class="progress-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-        </header>
+<header>
+  <h1>FitnessSnap</h1>
+  <div class="daily-stat">
+    <span id="total-cals">0</span> / <span id="goal-cals">2000</span> kcal
+  </div>
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+</header>
 
-        <main>
-            <div class="camera-viewport">
-                <video id="video" autoplay playsinline></video>
-                <canvas id="canvas" style="display:none;"></canvas>
-                <div id="scan-overlay" class="overlay"></div>
-            </div>
+<main>
+  <div class="camera-viewport">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" hidden></canvas>
+  </div>
 
-            <div class="action-area">
-                <button id="scan-btn" class="main-fab">
-                    <span class="icon">📸</span>
-                </button>
-                <p id="status-text">Point at food and tap</p>
-            </div>
+  <div class="action-area">
+    <button id="scan-btn" class="main-fab">📸</button>
+    <p id="status-text">Point at food and tap</p>
+  </div>
 
-            <div id="result-card" class="result-card hidden">
-                <div class="card-content">
-                    <h2 id="food-label">...</h2>
-                    <p><strong id="food-cals">0</strong> Calories</p>
-                    <div class="card-actions">
-                        <button id="cancel-btn" class="btn-secondary">Cancel</button>
-                        <button id="add-btn" class="btn-primary">Add to Log</button>
-                    </div>
-                </div>
-            </div>
-        </main>
+  <div id="result-card" class="result-card hidden">
+    <h2 id="food-label">Food</h2>
+    <p><strong id="food-cals">0</strong> Calories</p>
 
-        <section class="history">
-            <h3>Today's Log</h3>
-            <div id="log-list"></div>
-        </section>
+    <div class="card-actions">
+      <button id="cancel-btn" class="btn-secondary">Cancel</button>
+      <button id="add-btn" class="btn-primary">Add to Log</button>
     </div>
+  </div>
+</main>
 
-    <script src="script.js"></script>
+<section class="history">
+  <h3>Today's Log</h3>
+  <div id="log-list"></div>
+</section>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
