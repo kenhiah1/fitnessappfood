@@ -1,0 +1,91 @@
+:root {
+    --primary: #4ade80;
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    background: var(--card);
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: #334155;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--primary);
+    transition: width 0.5s ease;
+}
+
+.camera-viewport {
+    position: relative;
+    height: 40vh;
+    background: #000;
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-fab {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+    cursor: pointer;
+}
+
+.action-area {
+    padding: 20px;
+    text-align: center;
+}
+
+.result-card {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: var(--card);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.5);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.hidden { transform: translateY(150%); }
+
+.btn-primary { background: var(--primary); color: #000; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; }
+.btn-secondary { background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 10px 20px; border-radius: 10px; margin-right: 10px; }
+
+.history { padding: 20px; flex-grow: 1; }
+.log-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #334155; }
