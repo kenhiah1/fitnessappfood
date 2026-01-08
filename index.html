@@ -13,36 +13,32 @@
 
   <header>
     <h1>FitnessSnap</h1>
-
     <div class="daily-stat">
-      <span id="total-cals">0</span> /
-      <span id="goal-cals">2000</span> kcal
+      <span id="total-cals">0</span> / 2000 kcal
     </div>
-
     <div class="progress-container">
       <div id="progress-bar" class="progress-bar"></div>
     </div>
   </header>
 
   <main>
+    <!-- CAMERA -->
     <div class="camera-viewport">
       <video id="video" playsinline></video>
-      <img id="photo-preview" hidden>
     </div>
 
-    <div class="action-area">
-      <button id="scan-btn" class="main-fab">📸</button>
-      <p id="status-text">Point at food and tap</p>
+    <!-- VOICE SEARCH -->
+    <div class="voice-area">
+      <input id="food-input" type="text" placeholder="Say or type a food (ex: chicken breast)">
+      <button id="mic-btn">🎤</button>
+      <button id="add-food-btn">Add</button>
     </div>
 
+    <!-- RESULT -->
     <div id="result-card" class="result-card hidden">
-      <h2 id="food-label">Food</h2>
-      <p><strong id="food-cals">0</strong> Calories</p>
-
-      <div class="card-actions">
-        <button id="cancel-btn" class="btn-secondary">Cancel</button>
-        <button id="add-btn" class="btn-primary">Add to Log</button>
-      </div>
+      <h2 id="food-label"></h2>
+      <p><strong id="food-cals"></strong> Calories</p>
+      <button id="confirm-add" class="btn-primary">Add to Daily Total</button>
     </div>
   </main>
 
