@@ -1,4 +1,6 @@
 const video = document.getElementById("video");
+const preview = document.getElementById("photo-preview");
+
 const scanBtn = document.getElementById("scan-btn");
 const resultCard = document.getElementById("result-card");
 const cancelBtn = document.getElementById("cancel-btn");
@@ -13,7 +15,7 @@ const progressBar = document.getElementById("progress-bar");
 let totalCals = 0;
 const goal = 2000;
 
-// 🎥 START CAMERA
+/* START CAMERA */
 async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -23,31 +25,33 @@ async function startCamera() {
     video.srcObject = stream;
     video.play();
   } catch (err) {
-    alert("Camera access denied or not available.");
+    alert("Camera permission denied.");
     console.error(err);
   }
 }
 
 startCamera();
 
-// 📸 CAPTURE IMAGE + FAKE AI RESULT
+/* CAPTURE PHOTO + DEMO RESULT */
 scanBtn.addEventListener("click", () => {
-  // Create canvas
   const canvas = document.createElement("canvas");
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-  const ctx = canvas.getContext("2d");
 
+  const ctx = canvas.getContext("2d");
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  // 👉 Here is where REAL AI would go later
+  const imageData = canvas.toDataURL("image/jpeg");
 
-  // Demo AI response
+  preview.src = imageData;
+  preview.hidden = false;
+
+  // Demo AI result
   const foods = [
     { name: "Grilled Chicken", cals: 320 },
-    { name: "Caesar Salad", cals: 180 },
+    { name: "Salad Bowl", cals: 180 },
     { name: "Cheeseburger", cals: 540 },
-    { name: "Pasta Bowl", cals: 420 }
+    { name: "Pasta", cals: 420 }
   ];
 
   const pick = foods[Math.floor(Math.random() * foods.length)];
@@ -60,10 +64,12 @@ scanBtn.addEventListener("click", () => {
 
 cancelBtn.addEventListener("click", () => {
   resultCard.classList.add("hidden");
+  preview.hidden = true;
 });
 
 addBtn.addEventListener("click", () => {
   const cals = Number(foodCals.textContent);
+
   totalCals += cals;
   totalCalsEl.textContent = totalCals;
 
@@ -76,4 +82,5 @@ addBtn.addEventListener("click", () => {
   logList.prepend(item);
 
   resultCard.classList.add("hidden");
+  preview.hidden = true;
 });
